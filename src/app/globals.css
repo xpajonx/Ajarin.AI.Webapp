@@ -1,26 +1,122 @@
 @import "tailwindcss";
+@import "tw-animate-css";
+@import "shadcn/tailwind.css";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+@custom-variant dark (&:is(.dark *));
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-body);
+  --font-heading: var(--font-heading);
+  
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* Brand Specifics */
+  --color-accent-primary: #00D4AA;
+  --color-accent-secondary: #3B82F6;
+  --color-glass: rgba(255, 255, 255, 0.05);
+  --color-glass-border: rgba(255, 255, 255, 0.08);
+  --color-success: #10B981;
+
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-full: 9999px;
+
+  --shadow-glass: 0 4px 30px rgba(0, 0, 0, 0.3);
+  --blur-glass: blur(12px);
+
+  --spacing-xs: 4px;
+  --spacing-sm: 8px;
+  --spacing-md: 16px;
+  --spacing-lg: 24px;
+  --spacing-xl: 32px;
+  --spacing-2xl: 48px;
+  
+  --height-mini-player: 64px;
+  --height-nav: 56px;
+  --size-touch-target: 44px;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+:root {
+  /* DARK MODE ONLY - Defaulting :root to dark values */
+  --background: #0A0E27;
+  --foreground: #F0F0F5;
+  
+  --card: #111633;
+  --card-foreground: #F0F0F5;
+  
+  --popover: #111633;
+  --popover-foreground: #F0F0F5;
+  
+  --primary: #00D4AA;
+  --primary-foreground: #0A0E27;
+  
+  --secondary: #3B82F6;
+  --secondary-foreground: #F0F0F5;
+  
+  --muted: #111633;
+  --muted-foreground: #8B8FA3;
+  
+  --accent: #111633;
+  --accent-foreground: #00D4AA;
+  
+  --destructive: #EF4444;
+  --destructive-foreground: #F0F0F5;
+  
+  --border: rgba(255, 255, 255, 0.08);
+  --input: rgba(255, 255, 255, 0.08);
+  --ring: #00D4AA;
+  
+  --radius: 12px;
+}
+
+/* Explicitly support .dark for shadcn compatibility if needed, 
+   but since it's dark-only, we mainly care about :root */
+.dark {
+  --background: #0A0E27;
+  --foreground: #F0F0F5;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50 transition-colors duration-200;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+  html {
+    @apply font-body;
+  }
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-heading tracking-tight;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@layer components {
+  .glass {
+    @apply bg-glass backdrop-blur-glass border border-glass-border shadow-glass;
+  }
 }
